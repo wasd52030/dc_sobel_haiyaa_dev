@@ -118,16 +118,21 @@ class DCBot(Configure configure)
         else
             lengthOfCommand = message.Content.Length;
 
-        command = message.Content.Substring(1, lengthOfCommand - 1).ToLower();
+        command = message.Content.Substring(1, lengthOfCommand - 1);
 
-        if (command.Equals("6"))
+
+        switch (command)
         {
-            message.Channel.SendMessageAsync($@"屌你老母 {message.Author.Mention}");
+            case "6":
+                message.Channel.SendMessageAsync($@"屌你老母 {message.Author.Mention}");
+                break;
+            case "Xi":
+                message.Channel.SendMessageAsync($@"別看{message.Author.Mention}今天鬧得歡，小心啊今後拉清單");
+                break;
+            default: 
+            break;
         }
-        else if (command.Equals("Xi"))
-        {
-            message.Channel.SendMessageAsync($@"別看{message.Author.Mention}今天鬧得歡，小心啊今後拉清單");
-        }
+        
         return Task.CompletedTask;
     }
 }
