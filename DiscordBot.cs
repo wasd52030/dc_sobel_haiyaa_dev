@@ -44,17 +44,17 @@ class DCBot(Configure configure)
     {
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd")}\n請A班同仁於1555時將卡巴病毒報告匯出成PDF";
+            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss HH:mm:ss")}\n請A班同仁於1555時將卡巴病毒報告匯出成PDF";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(15, 55));
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd")}\n請B班同仁於2355時將卡巴病毒報告匯出成PDF\n匯出完後將當天全部的PDF檔案寄outlook給管制官";
+            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}\n請B班同仁於2355時將卡巴病毒報告匯出成PDF\n匯出完後將當天全部的PDF檔案寄outlook給管制官";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(23, 55));
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd")}\n請C班同仁於0755時將卡巴病毒報告匯出成PDF";
+            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}\n請C班同仁於0755時將卡巴病毒報告匯出成PDF";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(07, 55));
     }
@@ -63,7 +63,7 @@ class DCBot(Configure configure)
     {
         JobManager.AddJob(async () =>
         {
-            await Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{DateTime.Now.ToString("yyyy/MM/dd")}");
+            await Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}");
         }, s => s.ToRunEvery(1).Hours());
     }
 
