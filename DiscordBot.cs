@@ -64,7 +64,7 @@ class DCBot(Configure configure)
         JobManager.AddJob(async () =>
         {
             await Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間:{DateTime.Now}");
-        }, s => s.ToRunEvery(30).Minutes());
+        }, s => s.ToRunEvery(1).Hours());
     }
 
     private async Task Notify(string ChannelID, string Message)
@@ -123,6 +123,10 @@ class DCBot(Configure configure)
         if (command.Equals("6"))
         {
             message.Channel.SendMessageAsync($@"屌你老母 {message.Author.Mention}");
+        }
+        else if (command.Equals("Xi"))
+        {
+            message.Channel.SendMessageAsync($@"別看{message.Author.Mention}今天鬧得歡，小心啊今後拉清單");
         }
         return Task.CompletedTask;
     }
