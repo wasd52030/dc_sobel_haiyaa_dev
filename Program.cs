@@ -14,7 +14,7 @@ IConfiguration configuration = new ConfigurationBuilder()
 Configure config = new()
 {
     ApiKey = configuration.GetValue<string>("ApiKey")!,
-    Channel_sobel_haiyaa_dev__general = configuration.GetValue<string>("Id_discord-sobel.haiyaa.dev_general")!
+    Channel_sobel_haiyaa_dev__general = configuration.GetValue<string>("Id_discord_sobel_haiyaa_dev_general")!
 };
 
 JobManager.Initialize();
