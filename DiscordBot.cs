@@ -44,7 +44,7 @@ class DCBot(Configure configure)
     {
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss HH:mm:ss")}\n請A班同仁於1555時將卡巴病毒報告匯出成PDF";
+            string message = $"現在時間：{DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss")}\n請A班同仁於1555時將卡巴病毒報告匯出成PDF";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(15, 55));
         JobManager.AddJob(async () =>
