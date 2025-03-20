@@ -1,13 +1,8 @@
 using Discord;
 using Discord.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using System.Timers;
 using FluentScheduler;
 
 
@@ -46,17 +41,17 @@ class DCBot(Configure configure)
     {
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{CurrentTime}\n請A班同仁於1555時將卡巴病毒報告匯出成PDF";
+            string message = $"現在時間：{CurrentTime}\n請A班同仁於1555時將卡巴病毒報告截圖\n**完成後要寫工作日誌！！！**";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(15, 55));
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{CurrentTime}\n請B班同仁於2355時將卡巴病毒報告匯出成PDF\n匯出完後將當天全部的PDF檔案寄outlook給管制官";
+            string message = $"現在時間：{CurrentTime}\n請B班同仁於2355時將卡巴病毒報告截圖\n匯出完後將當天全部的截圖寄outlook給管制官\n**完成後要寫工作日誌！！！**";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(23, 55));
         JobManager.AddJob(async () =>
         {
-            string message = $"現在時間：{CurrentTime}\n請C班同仁於0755時將卡巴病毒報告匯出成PDF";
+            string message = $"現在時間：{CurrentTime}\n請C班同仁於0755時將卡巴病毒報告截圖\n**完成後要寫工作日誌！！！**";
             await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(07, 55));
     }
@@ -102,11 +97,11 @@ class DCBot(Configure configure)
         return Task.CompletedTask;
     }
 
-    // coMMand sample -> 「!6」
+    // command sample -> 「!6」
     private Task CoMMandHandler(SocketMessage message)
     {
 
-        string coMMand = "";
+        string command = "";
         int lengthOfCoMMand = -1;
 
         if (!message.Content.StartsWith('!'))
@@ -120,16 +115,19 @@ class DCBot(Configure configure)
         else
             lengthOfCoMMand = message.Content.Length;
 
-        coMMand = message.Content.Substring(1, lengthOfCoMMand - 1);
+        command = message.Content.Substring(1, lengthOfCoMMand - 1);
 
 
-        switch (coMMand)
+        switch (command)
         {
             case "6":
                 message.Channel.SendMessageAsync($@"屌你老母 {message.Author.Mention}");
                 break;
             case "Xi":
                 message.Channel.SendMessageAsync($@"別看{message.Author.Mention}今天鬧得歡，小心啊今後拉清單");
+                break;
+            case "為什麼要演奏春日影":
+                message.Channel.SendMessageAsync($@"**因為春日影是一首好歌**");
                 break;
             default:
                 break;
