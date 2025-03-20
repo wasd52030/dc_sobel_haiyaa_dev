@@ -6,7 +6,7 @@ COPY . ./
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
-RUN dotnet publish -o out
+RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/runtime:8.0@sha256:89669b04fa9d98dc2f4519184af3b953e464c4f3ba0da1c3c42d822aa8b68def
