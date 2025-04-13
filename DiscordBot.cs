@@ -19,8 +19,8 @@ class DCBot(Configure configure)
         };
 
         _client = new DiscordSocketClient(DC_config);
-        _client.MessageReceived += CommandHandler;
-        _client.Log += Log;
+        _client.MessageReceived += HandleCommandAsync;
+        _client.Log += LogAsync;
 
         await _client.LoginAsync(TokenType.Bot, configure.ApiKey);
         await _client.StartAsync();
@@ -43,17 +43,17 @@ class DCBot(Configure configure)
         JobManager.AddJob(async () =>
         {
             string message = $"現在時間：{CurrentTime}\n請A班同仁於1555時將卡巴病毒報告截圖\n**完成後要寫工作日誌！！！**";
-            await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(15, 55));
         JobManager.AddJob(async () =>
         {
             string message = $"現在時間：{CurrentTime}\n請B班同仁於2355時將卡巴病毒報告截圖\n匯出完後將當天全部的截圖寄outlook給管制官\n**完成後要寫工作日誌！！！**";
-            await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(23, 55));
         JobManager.AddJob(async () =>
         {
             string message = $"現在時間：{CurrentTime}\n請C班同仁於0755時將卡巴病毒報告截圖\n**完成後要寫工作日誌！！！**";
-            await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(07, 55));
     }
 
@@ -61,7 +61,7 @@ class DCBot(Configure configure)
     {
         JobManager.AddJob(async () =>
         {
-            await Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{CurrentTime}");
+            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{CurrentTime}");
         }, s => s.ToRunEvery(1).Hours().At(00));
     }
 
@@ -70,11 +70,11 @@ class DCBot(Configure configure)
         JobManager.AddJob(async () =>
         {
             string message = $"檢整當天 [18-22|18-08] 假別，開電子假單";
-            await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
         }, s => s.ToRunEvery(1).Days().At(08, 00));
     }
 
-    private async Task Notify(string ChannelID, string Message)
+    private async Task NotifyAsync(string ChannelID, string Message)
     {
         var api = $"https://discord.com/api/v10/channels/{ChannelID}/messages";
 
@@ -101,14 +101,14 @@ class DCBot(Configure configure)
         }
     }
 
-    private Task Log(LogMessage msg)
+    private Task LogAsync(LogMessage msg)
     {
         Console.WriteLine(msg.ToString());
         return Task.CompletedTask;
     }
 
     // command sample -> 「!6」
-    private Task CommandHandler(SocketMessage message)
+    private Task HandleCommandAsync(SocketMessage message)
     {
 
         if (!message.Content.StartsWith('!'))
