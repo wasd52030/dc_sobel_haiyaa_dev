@@ -19,7 +19,7 @@ class DCBot(Configure configure)
         };
 
         _client = new DiscordSocketClient(DC_config);
-        _client.MessageReceived += CoMMandHandler;
+        _client.MessageReceived += CommandHandler;
         _client.Log += Log;
 
         await _client.LoginAsync(TokenType.Bot, configure.ApiKey);
@@ -108,11 +108,8 @@ class DCBot(Configure configure)
     }
 
     // command sample -> 「!6」
-    private Task CoMMandHandler(SocketMessage message)
+    private Task CommandHandler(SocketMessage message)
     {
-
-        string command = "";
-        int lengthOfCoMMand = -1;
 
         if (!message.Content.StartsWith('!'))
             return Task.CompletedTask;
@@ -120,13 +117,8 @@ class DCBot(Configure configure)
         if (message.Author.IsBot)
             return Task.CompletedTask;
 
-        if (message.Content.Contains(' '))
-            lengthOfCoMMand = message.Content.IndexOf(' ');
-        else
-            lengthOfCoMMand = message.Content.Length;
-
-        command = message.Content.Substring(1, lengthOfCoMMand - 1);
-
+        int lengthOfCommand = message.Content.Contains(' ') ? message.Content.IndexOf(' ') : message.Content.Length;
+        string command = message.Content.Substring(1, lengthOfCommand - 1);
 
         switch (command)
         {
