@@ -62,7 +62,7 @@ class DCBot(Configure configure)
         JobManager.AddJob(async () =>
         {
             await Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{CurrentTime}");
-        }, s => s.ToRunEvery(1).Hours());
+        }, s => s.ToRunEvery(1).Hours().At(00));
     }
 
     private void EveryDay1808()
