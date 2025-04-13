@@ -34,6 +34,7 @@ class DCBot(Configure configure)
     {
         NationalStandardTimer();
         kasperskyViriusReportNotify();
+        EveryDay1808();
         // Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間:{DateTime.Now}").GetAwaiter().GetResult();
     }
 
@@ -62,6 +63,15 @@ class DCBot(Configure configure)
         {
             await Notify(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{CurrentTime}");
         }, s => s.ToRunEvery(1).Hours());
+    }
+
+    private void EveryDay1808()
+    {
+        JobManager.AddJob(async () =>
+        {
+            string message = $"檢整當天 [18-22|18-08] 假別，開電子假單";
+            await Notify(configure.Channel_sobel_haiyaa_dev__general, message);
+        }, s => s.ToRunEvery(1).Days().At(08, 00));
     }
 
     private async Task Notify(string ChannelID, string Message)
