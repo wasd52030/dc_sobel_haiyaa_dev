@@ -43,17 +43,17 @@ class DCBot(Configure configure)
         JobManager.AddJob(async () =>
         {
             string message = $"現在時間：{CurrentTime}\n請A班同仁於1555時將卡巴病毒報告截圖\n**完成後要寫工作日誌！！！**";
-            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.sudo_ntpdate_ChannelID, message);
         }, s => s.ToRunEvery(1).Days().At(15, 55));
         JobManager.AddJob(async () =>
         {
             string message = $"現在時間：{CurrentTime}\n請B班同仁於2355時將卡巴病毒報告截圖\n匯出完後將當天全部的截圖寄outlook給管制官\n**完成後要寫工作日誌！！！**";
-            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.sudo_ntpdate_ChannelID, message);
         }, s => s.ToRunEvery(1).Days().At(23, 55));
         JobManager.AddJob(async () =>
         {
             string message = $"現在時間：{CurrentTime}\n請C班同仁於0755時將卡巴病毒報告截圖\n**完成後要寫工作日誌！！！**";
-            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.sudo_ntpdate_ChannelID, message);
         }, s => s.ToRunEvery(1).Days().At(07, 55));
     }
 
@@ -61,7 +61,7 @@ class DCBot(Configure configure)
     {
         JobManager.AddJob(async () =>
         {
-            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, $"中央報時\n現在時間：{CurrentTime}");
+            await NotifyAsync(configure.sudo_ntpdate_ChannelID, $"中央報時\n現在時間：{CurrentTime}");
         }, s => s.ToRunEvery(1).Hours().At(00));
     }
 
@@ -70,7 +70,7 @@ class DCBot(Configure configure)
         JobManager.AddJob(async () =>
         {
             string message = $"檢整當天 [18-22|18-08] 假別，開電子假單";
-            await NotifyAsync(configure.Channel_sobel_haiyaa_dev__general, message);
+            await NotifyAsync(configure.sudo_ntpdate_ChannelID, message);
         }, s => s.ToRunEvery(1).Days().At(08, 00));
     }
 
@@ -107,11 +107,11 @@ class DCBot(Configure configure)
         return Task.CompletedTask;
     }
 
-    // command sample -> 「!6」
+    // command sample -> 「&6」
     private Task HandleCommandAsync(SocketMessage message)
     {
 
-        if (!message.Content.StartsWith('!'))
+        if (!message.Content.StartsWith('&'))
             return Task.CompletedTask;
 
         if (message.Author.IsBot)
@@ -128,8 +128,12 @@ class DCBot(Configure configure)
             case "Xi":
                 message.Channel.SendMessageAsync($@"別看{message.Author.Mention}今天鬧得歡，小心啊今後拉清單");
                 break;
-            case "為什麼要演奏春日影":
-                message.Channel.SendMessageAsync($@"**因為春日影是一首好歌**");
+            case "春日影":
+                message.Channel.SendMessageAsync($@"なんで春日影やったの！？");
+                message.Channel.SendFileAsync("assets/fSiWAuV.jpeg");
+                break;
+            case "大社":
+                message.Channel.SendMessageAsync($@"{message.Author.Mention}，那裡是高雄著名的三寶鬥技場，千萬小心");
                 break;
             default:
                 break;
