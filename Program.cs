@@ -14,7 +14,7 @@ IConfiguration configuration = new ConfigurationBuilder()
 Configure config = new()
 {
     ApiKey = configuration.GetValue<string>("ApiKey")!,
-    sudo_ntpdate_ChannelID = configuration.GetValue<string>("Id_discord_sobel_haiyaa_dev_sudo-ntpdate")!
+    sudo_ntpdate_ChannelID = configuration.GetValue<string>("Id_discord_sobel_haiyaa_dev_sudo_ntpdate")!
 };
 
 JobManager.Initialize();
